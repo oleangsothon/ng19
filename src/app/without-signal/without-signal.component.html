@@ -1,0 +1,24 @@
+<h1>Without Signal</h1>
+<div>
+    <label for="menuSelect">เลือกเมนู:</label>
+    <select id="menuSelect" (change)="changeMenuItem($event)">
+        <option *ngFor="let item of menuItems" [value]="item.id">
+            {{ item.name }}
+        </option>
+    </select>
+</div>
+
+<div>
+    <label for="quantityInput">จำนวน:</label>
+    <input id="quantityInput" type="number" [(value)]="quantity" (change)="changeQuantity($event)" min="1" />
+</div>
+
+
+<label for="priceInput">ราคา: {{ total }}</label>
+
+
+<br><br>
+<div>
+    <label for="remarkInput">หมายเหตุ:</label>
+    <input id="remarkInput" type="text" [(value)]="remark" (change)="changeRemark($event)" />
+</div>
