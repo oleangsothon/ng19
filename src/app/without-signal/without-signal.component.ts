@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-without-signal',
@@ -12,6 +13,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './without-signal.component.css'
 })
 export class WithoutSignalComponent {
+
+  constructor(private router: Router) {
+    const tree = this.router.createUrlTree(['/dashboard', 123, 456], { queryParams: { user: 'admin' } });
+    console.log('createUrlTree', tree.toString());
+  }
+
   menuItems = [
     { id: 1, name: 'ข้าวผัด', price: 50 },
     { id: 2, name: 'ก๋วยเตี๋ยว', price: 40 },
