@@ -27,12 +27,6 @@ export class LinkedSignalComponent {
   protected selectedMenuItemId = signal<number>(1);
   protected quantity = signal<number>(1);
 
-  protected total = computed(() => {
-    console.log('Compute total');
-    const menuItem = this.menuItems.find(item => item.id === this.selectedMenuItemId());
-    return menuItem ? menuItem.price * this.quantity() : 0;
-  });
-
   protected remark = linkedSignal({
     source: () => ({
       menuItemId: this.selectedMenuItemId(),
@@ -41,18 +35,21 @@ export class LinkedSignalComponent {
     computation: () => '',
   });
 
-  protected changeMenuItem(event: Event): void {
-    const menuItemId = Number((event.target as HTMLSelectElement).value);
-    this.selectedMenuItemId.set(menuItemId);
-  }
+  protected total = linkedSignal({
+    source: () => ({
+      menuItemId: this.selectedMenuItemId(),
+      quantity: this.quantity(),
+    }),
+    computation: () => {
+      console.log('Compute total');
+      const menuItem = this.menuItems.find(item => item.id == this.selectedMenuItemId());
+      return menuItem ? menuItem.price * this.quantity() : 0;
+    },
+  });
 
-  protected changeQuantity(event: Event): void {
-    const quantity = Number((event.target as HTMLSelectElement).value);
-    this.quantity.set(quantity);
-  }
-
-  protected changeRemark(event: Event): void {
-    const remark = (event.target as HTMLInputElement).value;
-    this.remark.set(remark);
-  }
+  // protected total = computed(() => {
+  //   console.log('Compute total');
+  //   const menuItem = this.menuItems.find(item => item.id == this.selectedMenuItemId());
+  //   return menuItem ? menuItem.price * this.quantity() : 0;
+  // });
 }

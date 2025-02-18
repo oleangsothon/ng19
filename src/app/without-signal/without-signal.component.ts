@@ -35,24 +35,7 @@ export class WithoutSignalComponent {
     return menuItem ? menuItem.price * this.quantity : 0;
   }
 
-  changeMenuItem(event: Event): void {
-    const menuItemId = Number((event.target as HTMLSelectElement).value);
-    this.selectedMenuItemId = menuItemId;
-
-    // Reset remark เมื่อเปลี่ยนเมนู
+  resetRemark(): void {
     this.remark = '';
-  }
-
-  changeQuantity(event: Event): void {
-    const quantity = Number((event.target as HTMLInputElement).value);
-    this.quantity = quantity;
-
-    // Reset remark เมื่อเปลี่ยนจำนวน
-    this.remark = '';
-  }
-
-  changeRemark(event: Event): void {
-    const remark = (event.target as HTMLInputElement).value;
-    this.remark = remark;
   }
 }

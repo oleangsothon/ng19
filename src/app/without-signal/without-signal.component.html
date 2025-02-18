@@ -1,24 +1,27 @@
 <h1>Without Signal</h1>
 <div>
     <label for="menuSelect">เลือกเมนู:</label>
-    <select id="menuSelect" (change)="changeMenuItem($event)">
+    <select id="menuSelect" [(ngModel)]="selectedMenuItemId" (change)="resetRemark()">
         <option *ngFor="let item of menuItems" [value]="item.id">
             {{ item.name }}
         </option>
     </select>
 </div>
+selectedMenuItemId: {{ selectedMenuItemId }}
 
 <div>
     <label for="quantityInput">จำนวน:</label>
-    <input id="quantityInput" type="number" [(value)]="quantity" (change)="changeQuantity($event)" min="1" />
+    <input id="quantityInput" type="number" [(ngModel)]="quantity" (change)="resetRemark()" min="1" />
 </div>
+quantity: {{ quantity }}
 
-
+<br><br>
 <label for="priceInput">ราคา: {{ total }}</label>
 
 
 <br><br>
 <div>
     <label for="remarkInput">หมายเหตุ:</label>
-    <input id="remarkInput" type="text" [(value)]="remark" (change)="changeRemark($event)" />
+    <input id="remarkInput" type="text" [(ngModel)]="remark"/>
 </div>
+remark: {{ remark }}
